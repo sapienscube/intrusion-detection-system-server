@@ -6,10 +6,12 @@ app = Flask(__name__)
 
 
 def fix_types(packet):
-    default_packet = [0, 'icmp', 'ecr_i', 'SF', 1032, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 511,
+    example_packet = [0, 'icmp', 'ecr_i', 'SF', 1032, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 511,
                       511, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 255, 255, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 'smurf.']
-    # types:
-    return default_packet
+    last_floats = [float(p) for p in packet[4:]]
+    clean_packet = [float(packet[0]), packet[1],
+                    packet[2], packet[3]] + last_floats
+    return clean_packet
 
 
 class Query(graphene.ObjectType):
@@ -17,6 +19,7 @@ class Query(graphene.ObjectType):
 
     def resolve_predict(self, info, packet):
         clean_packet = fix_types(packet)
+        print(clean_packet)
         return clean_packet
 
 
