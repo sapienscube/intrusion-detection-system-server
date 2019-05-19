@@ -6,10 +6,10 @@ app = Flask(__name__)
 
 
 class Query(graphene.ObjectType):
-    hello = graphene.String(argument=graphene.String(default_value="stranger"))
+    predict = graphene.String(packet=graphene.List(graphene.String))
 
-    def resolve_hello(self, info, argument):
-        return 'Hello ' + argument
+    def resolve_predict(self, info, packet):
+        return packet
 
 
 schema = graphene.Schema(query=Query)
