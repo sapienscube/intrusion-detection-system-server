@@ -1,6 +1,7 @@
 import graphene
 from flask import Flask
 from flask_graphql import GraphQLView
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -14,13 +15,19 @@ def fix_types(packet):
     return clean_packet
 
 
+# df = pd.DataFrame([header, packet])
+df = pd.read_csv('kddcup/manual_test.csv')
+dfY = df[['normal.']]
+dfX = df.drop(columns=['normal.'])
+
+
 class Query(graphene.ObjectType):
     predict = graphene.String(packet=graphene.List(graphene.String))
 
     def resolve_predict(self, info, packet):
-        clean_packet = fix_types(packet)
-        print(clean_packet)
-        return clean_packet
+        # clean_packet = fix_types(packet)
+        # print(clean_packet)
+        return dfX.values.tolist()[0]
 
 
 schema = graphene.Schema(query=Query)
