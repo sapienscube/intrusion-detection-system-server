@@ -24,7 +24,7 @@ def fix_types(packets):
 
 
 class Query(graphene.ObjectType):
-    predict = graphene.List(graphene.String, packets=graphene.List(graphene.List(graphene.String)))
+    predict = graphene.List(graphene.String, packets=graphene.List(graphene.List(graphene.String), description="packets"))
 
     def resolve_predict(self, info, packets):
         # Cast number strings in packet to their types (float here)
