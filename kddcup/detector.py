@@ -2,8 +2,7 @@
 import pickle
 import pandas as pd
 import numpy as np
-import tensorflow as tf
-
+from keras.models import load_model
 from preprocessor import Preprocessor
 
 
@@ -15,7 +14,7 @@ class Detector(object):
     @classmethod
     def from_path(cls, encoders_path, model_path):
         prep = Preprocessor.load(encoders_path)
-        mdl = tf.keras.models.load_model(model_path)
+        mdl = load_model(model_path)
         return cls(prep, mdl)
 
     def predict(self, data):

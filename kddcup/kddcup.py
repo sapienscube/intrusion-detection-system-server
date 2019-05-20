@@ -32,7 +32,7 @@ class Query(graphene.ObjectType):
 
         # Load preprocessors and model for prediction
         preprocessor_path = 'kddcup/serialized-preprocessor'
-        model_path = 'kddcup/models/kddcup-model-loss-0.0033-acc-99.94.h5'
+        model_path = 'kddcup/models/kddcup-model-loss-0.0039-acc-99.89.h5'
         d = Detector.from_path(preprocessor_path, model_path)
 
         # Format packet to a dataframe format
