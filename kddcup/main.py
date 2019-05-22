@@ -27,7 +27,7 @@ def fix_types(packets):
 
 
 class Query(graphene.ObjectType):
-    predict = graphene.List(graphene.String, packets=graphene.List(graphene.List(graphene.String), description="A list of packets like these: " + str(example_malicious_packet) + "\n" + "\n" + "Where single quotes must be double quotes"))
+    predict = graphene.List(graphene.String, packets=graphene.List(graphene.List(graphene.String), description="A list of packets like these: " + "\n" + str([example_malicious_packet]) + "\n" + "\n" + "Where single quotes must be double quotes"))
 
     def resolve_predict(self, info, packets):
         # Cast number strings in packet to their types (float here)
