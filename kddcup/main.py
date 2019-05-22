@@ -1,11 +1,14 @@
 import graphene
 from flask import Flask
 from flask_graphql import GraphQLView
+from flask_cors import CORS
 import pandas as pd
 
 from detector import Detector
 
 app = Flask(__name__)
+CORS(app)
+
 
 example_malicious_packet = ["0", "icmp", "ecr_i", "SF", "1032", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "511",
                   "511", "0.0", "0.0", "0.0", "0.0", "1.0", "0.0", "0.0", "255", "255", "1.0", "0.0", "1.0", "0.0", "0.0", "0.0", "0.0", "0.0"]
